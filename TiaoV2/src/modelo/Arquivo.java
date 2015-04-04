@@ -19,6 +19,8 @@ public class Arquivo extends EntidadeBase {
 
 	private Date dataUltimoAcesso;
 
+	private String diretorioOrigem;
+
 	public Long getTamanho() {
 		return tamanho;
 	}
@@ -51,6 +53,14 @@ public class Arquivo extends EntidadeBase {
 		this.dataUltimoAcesso = dataUltimoAcesso;
 	}
 
+	public String getDiretorioOrigem() {
+		return diretorioOrigem;
+	}
+
+	public void setDiretorioOrigem(String diretorioOrigem) {
+		this.diretorioOrigem = diretorioOrigem;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -62,6 +72,8 @@ public class Arquivo extends EntidadeBase {
 		result = prime
 				* result
 				+ ((dataUltimoAcesso == null) ? 0 : dataUltimoAcesso.hashCode());
+		result = prime * result
+				+ ((diretorioOrigem == null) ? 0 : diretorioOrigem.hashCode());
 		result = prime * result + ((tamanho == null) ? 0 : tamanho.hashCode());
 		return result;
 	}
@@ -89,6 +101,11 @@ public class Arquivo extends EntidadeBase {
 			if (other.dataUltimoAcesso != null)
 				return false;
 		} else if (!dataUltimoAcesso.equals(other.dataUltimoAcesso))
+			return false;
+		if (diretorioOrigem == null) {
+			if (other.diretorioOrigem != null)
+				return false;
+		} else if (!diretorioOrigem.equals(other.diretorioOrigem))
 			return false;
 		if (tamanho == null) {
 			if (other.tamanho != null)

@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import modelo.EntidadeBase;
-import modelo.Extensao;
 
 //TODO Implementar logs
 
@@ -19,7 +17,6 @@ public abstract class GenericDAO<T extends EntidadeBase> {
 
 	private EntityManagerFactory factory;
 	private EntityManager entityManager;
-	
 	private Class<T> entityClass; 
 
 	public EntityManager getEmEntityManager() {
@@ -54,7 +51,11 @@ public abstract class GenericDAO<T extends EntidadeBase> {
 			getEmEntityManager().getTransaction().rollback();
 		}
 	}
-
+	
+	public void deleteById(Object id){
+		delete(id, entityClass);
+	}
+	
 	public T update(T entity) {
 		try {
 			getEmEntityManager().getTransaction().begin();
@@ -88,6 +89,7 @@ public abstract class GenericDAO<T extends EntidadeBase> {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<T> pesquisarPorParametros(HashMap<String, Object> parametros){
 		try {
 			return (List<T>) getEmEntityManager().find(entityClass, parametros);
@@ -96,12 +98,4 @@ public abstract class GenericDAO<T extends EntidadeBase> {
 		}
 	}
 	
-	public static void main(String[] args) {
-		ExtensaoDAO dao = new ExtensaoDAO(Extensao.class);
-		Extensao extensao = new Extensao();
-		extensao.setExtensao(".pdf");
-		extensao.setDataCadastro(new Date());
-		dao.saveOrUpdate(extensao);
-		dao.pesquisarPorId(Long.valueOf("1")).getExtensao();
-	}
 }

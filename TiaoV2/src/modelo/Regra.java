@@ -9,19 +9,16 @@ public class Regra extends EntidadeBase {
 
 	private static final long serialVersionUID = 3361682229508424377L;
 
-	private String extensao;
+	private Extensao extensao;
 	private String diretorioDestino;
 	private String diretorioOrigem;
-	
-	private Arquivo origem;
-	
-	private Arquivo destino;
+	private Arquivo arquivo;
 
-	public String getExtensao() {
+	public Extensao getExtensao() {
 		return extensao;
 	}
 
-	public void setExtensao(String extensao) {
+	public void setExtensao(Extensao extensao) {
 		this.extensao = extensao;
 	}
 
@@ -41,11 +38,19 @@ public class Regra extends EntidadeBase {
 		this.diretorioOrigem = diretorioOrigem;
 	}
 
+	public Arquivo getArquivo() {
+		return arquivo;
+	}
+
+	public void setArquivo(Arquivo arquivo) {
+		this.arquivo = arquivo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((destino == null) ? 0 : destino.hashCode());
+		result = prime * result + ((arquivo == null) ? 0 : arquivo.hashCode());
 		result = prime
 				* result
 				+ ((diretorioDestino == null) ? 0 : diretorioDestino.hashCode());
@@ -53,7 +58,6 @@ public class Regra extends EntidadeBase {
 				+ ((diretorioOrigem == null) ? 0 : diretorioOrigem.hashCode());
 		result = prime * result
 				+ ((extensao == null) ? 0 : extensao.hashCode());
-		result = prime * result + ((origem == null) ? 0 : origem.hashCode());
 		return result;
 	}
 
@@ -66,10 +70,10 @@ public class Regra extends EntidadeBase {
 		if (getClass() != obj.getClass())
 			return false;
 		Regra other = (Regra) obj;
-		if (destino == null) {
-			if (other.destino != null)
+		if (arquivo == null) {
+			if (other.arquivo != null)
 				return false;
-		} else if (!destino.equals(other.destino))
+		} else if (!arquivo.equals(other.arquivo))
 			return false;
 		if (diretorioDestino == null) {
 			if (other.diretorioDestino != null)
@@ -86,28 +90,7 @@ public class Regra extends EntidadeBase {
 				return false;
 		} else if (!extensao.equals(other.extensao))
 			return false;
-		if (origem == null) {
-			if (other.origem != null)
-				return false;
-		} else if (!origem.equals(other.origem))
-			return false;
 		return true;
-	}
-
-	public Arquivo getOrigem() {
-		return origem;
-	}
-
-	public void setOrigem(Arquivo origem) {
-		this.origem = origem;
-	}
-
-	public Arquivo getDestino() {
-		return destino;
-	}
-
-	public void setDestino(Arquivo destino) {
-		this.destino = destino;
 	}
 
 }

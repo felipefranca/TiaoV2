@@ -24,6 +24,9 @@ public abstract class EntidadeBase implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCadastro;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataAlteracao;
+
 	public Long getId() {
 		return id;
 	}
@@ -48,10 +51,20 @@ public abstract class EntidadeBase implements Serializable {
 		this.dataCadastro = dataCadastro;
 	}
 
+	public Date getDataAlteracao() {
+		return dataAlteracao;
+	}
+
+	public void setDataAlteracao(Date dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result
+				+ ((dataAlteracao == null) ? 0 : dataAlteracao.hashCode());
 		result = prime * result
 				+ ((dataCadastro == null) ? 0 : dataCadastro.hashCode());
 		result = prime * result
@@ -69,6 +82,11 @@ public abstract class EntidadeBase implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		EntidadeBase other = (EntidadeBase) obj;
+		if (dataAlteracao == null) {
+			if (other.dataAlteracao != null)
+				return false;
+		} else if (!dataAlteracao.equals(other.dataAlteracao))
+			return false;
 		if (dataCadastro == null) {
 			if (other.dataCadastro != null)
 				return false;
@@ -86,5 +104,4 @@ public abstract class EntidadeBase implements Serializable {
 			return false;
 		return true;
 	}
-
 }

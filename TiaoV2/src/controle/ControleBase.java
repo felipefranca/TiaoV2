@@ -1,20 +1,41 @@
 package controle;
 
-public class ControleBase {
+import java.util.Date;
 
-  public void criar() {
-  }
+import dao.GenericDAO;
+import modelo.EntidadeBase;
 
-  public void alterar() {
-  }
+public abstract class ControleBase<T extends EntidadeBase, DAOGenerico extends GenericDAO<T>> {
+	
+	private GenericDAO<T> dao;
+	
+	public ControleBase(GenericDAO<T> obj){
+		dao = obj;
+	}
+	
+	public void criar(T t) {
+		if(t.getDataCadastro() == null){
+			t.setDataCadastro(new Date());
+		}
+		dao.save(t);
+	}
 
-  public void excluir() {
-  }
+	public void alterar(T t) {
+		if(t.getDataAlteracao() == null){
+			t.setDataAlteracao(new Date());
+		}
+		dao.saveOrUpdate(t);
+	}
 
-  public void listarPorId() {
-  }
+	public void excluir(T t) {
+		dao.deleteById(t.getId());
+	}
 
-  public void listarTodos() {
-  }
+	public T pesquisarPorId(Long id) {
+		return dao.pesquisarPorId(id);
+	}
+
+	public void pesquisarPorParametros() {
+	}
 
 }
