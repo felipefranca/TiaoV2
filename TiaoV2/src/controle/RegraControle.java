@@ -8,26 +8,23 @@ import dao.RegraDAO;
 
 public class RegraControle extends ControleBase<Regra, RegraDAO> {
 	
+	public Regra regra;
 	private ArquivoControle arquivoControle = new ArquivoControle(new ArquivoDAO(Arquivo.class));
 	
 	public RegraControle(GenericDAO<Regra> obj) {
 		super(new RegraDAO(Regra.class));
 	}
 
-	public Regra regra;
-
-	public Boolean verificarArquivoEmUso(Arquivo arquivo) {
-		return null;
+	public Boolean executarRegraPadrao(){
+		
+		return false;
 	}
 	
-	public void moverArquivo(Regra regra){
-		if(isRegraValida(regra)){
-			//TODO implementar corretamente a ideia do arquivo
-			getArquivoControle().criarArquivo(regra.getDiretorioOrigem());
-			
-		}
+	public Boolean executarRegra(Regra regra){
+		
+		return false;
 	}
-
+	
 	private boolean isRegraValida(Regra regra) {
 		return regra != null && regra.getArquivo() != null && regra.getDiretorioDestino() != null;
 	}

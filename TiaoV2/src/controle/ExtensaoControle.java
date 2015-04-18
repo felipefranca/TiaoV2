@@ -16,6 +16,10 @@ public class ExtensaoControle extends ControleBase<Extensao, ExtensaoDAO> {
 	public void ExensaoControle() {
 	}
 	
+	public Boolean criarExtensao(Extensao extensao) {
+		return null;
+	}
+	
 	public static void main(String[] args) {
 		ExtensaoControle controle = new ExtensaoControle(null);
 		Extensao extensao = new Extensao();
