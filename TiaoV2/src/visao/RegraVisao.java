@@ -3,6 +3,7 @@ package visao;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -14,6 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
+
+import modelo.Extensao;
+import controle.ExtensaoControle;
+import dao.ExtensaoDAO;
 
 public class RegraVisao extends JFrame {
 	
@@ -80,25 +85,21 @@ public class RegraVisao extends JFrame {
 		
 		JButton btnAdicionar = new JButton("Adicionar");
 		
-		//TODO Listar as extenções de Extenção controle 
-		
-		String [] itens = new String [15];
-		itens[0] = "Selecione";
-		itens[1] = ".pdf";
-		itens[2] = ".txt";
-		itens[3] = ".exe";
-		itens[3] = ".doc";
-		itens[4] = ".docx";
-		itens[5] = ".xls";
-		itens[6] = ".xlsx";
-		itens[7] = ".png";
-		itens[8] = ".jpg";
-		itens[9] = ".gif";
-		itens[10] = ".zip";
-		itens[11] = ".rar";
-		itens[12] = ".7z";
-		itens[13] = ".exe";
-		itens[14] = "tudo";
+		ExtensaoControle extensaoControle = new ExtensaoControle(new ExtensaoDAO(Extensao.class));
+		List<Extensao> list = extensaoControle.listarTodos();
+		String [] itens = null;
+		if(list != null && list.size() > 0){
+			itens = new String [list.size()+1];
+			itens[0] = "Selecione";
+			int i = 1;
+			for (Extensao extensao : list) {
+				itens[i] = extensao.getDescricao();
+				i++;
+			}
+		} else {
+			itens = new String [1];
+			itens[0] = "Selecione";
+		}
 		
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		JComboBox comboBox = new JComboBox(itens);

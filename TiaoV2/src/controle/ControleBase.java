@@ -1,6 +1,7 @@
 package controle;
 
 import java.util.Date;
+import java.util.List;
 
 import dao.GenericDAO;
 import modelo.EntidadeBase;
@@ -31,6 +32,10 @@ public abstract class ControleBase<T extends EntidadeBase, DAOGenerico extends G
 		dao.deleteById(t.getId());
 	}
 
+	public void excluir(Long id) {
+		dao.deleteById(id);
+	}
+	
 	public T pesquisarPorId(Long id) {
 		return dao.pesquisarPorId(id);
 	}
@@ -38,4 +43,7 @@ public abstract class ControleBase<T extends EntidadeBase, DAOGenerico extends G
 	public void pesquisarPorParametros() {
 	}
 
+	public List<T> listarTodos(){
+		return dao.listarTodos();
+	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
 
 import modelo.EntidadeBase;
 
@@ -18,7 +19,7 @@ public abstract class GenericDAO<T extends EntidadeBase> {
 	private EntityManagerFactory factory;
 	private EntityManager entityManager;
 	private Class<T> entityClass; 
-
+	
 	public EntityManager getEmEntityManager() {
 		if (entityManager == null) {
 			factory = Persistence.createEntityManagerFactory(UNIT_NAME);
@@ -98,4 +99,14 @@ public abstract class GenericDAO<T extends EntidadeBase> {
 		}
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<T> listarTodos(){
+		try {
+			CriteriaQuery criteriaQuery = getEmEntityManager().getCriteriaBuilder().createQuery();
+	        criteriaQuery.select(criteriaQuery.from(entityClass));
+	        return getEmEntityManager().createQuery(criteriaQuery).getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }
