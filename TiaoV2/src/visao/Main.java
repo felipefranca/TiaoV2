@@ -12,6 +12,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.Window.Type;
 
 public class Main extends JFrame {
 
@@ -39,9 +40,9 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
-		setTitle("Principal");
+		setTitle("Menu Inicial");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 730, 409);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -55,7 +56,22 @@ public class Main extends JFrame {
 				new RegraVisao().setVisible(true);
 			}
 		});
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Extens\u00E3o");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new ExtensaoVisao().setVisible(true);
+			}
+		});
+		
+		mnNewMenu.add(mntmNewMenuItem);
 		mnNewMenu.add(mntmRegras);
+		
+		JMenu mnNewMenu_1 = new JMenu("Configura\u00E7\u00F5es");
+		menuBar.add(mnNewMenu_1);
+		
+		JMenuItem mntmRegrasAutomaticas = new JMenuItem("Regras Autom\u00E1ticas");
+		mnNewMenu_1.add(mntmRegrasAutomaticas);
 		contentPane = new JPanel();
 		contentPane.setToolTipText("Principal");
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

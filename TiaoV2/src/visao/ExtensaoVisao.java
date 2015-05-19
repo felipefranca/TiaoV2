@@ -66,10 +66,15 @@ public class ExtensaoVisao extends JFrame {
 		JButton btnRemover = new JButton("Remover Selecionado");
 		btnRemover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Long id = Long.valueOf(table.getModel().getValueAt(table.getSelectedRow(),0).toString());
-				((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
-				controle.excluir(id);
-				table.repaint();
+				int row = table.getSelectedRow();
+				if(row != -1 && row > 0){
+					Long id = Long.valueOf(table.getModel().getValueAt(row,0).toString());
+					((DefaultTableModel) table.getModel()).removeRow(row);
+					controle.excluir(id);
+					table.repaint();
+				} else {
+					controle.alerta("Nenhuma linha selecionada", null);
+				}
 			}
 		});
 		

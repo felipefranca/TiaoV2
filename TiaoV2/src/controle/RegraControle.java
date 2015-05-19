@@ -17,7 +17,7 @@ public class RegraControle extends ControleBase<Regra, RegraDAO> {
 
 	public Boolean executarRegraPadrao(){
 		
-		return false;
+		return true;
 	}
 	
 	public Boolean executarRegra(Regra regra){

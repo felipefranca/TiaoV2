@@ -3,6 +3,10 @@ package controle;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import dao.GenericDAO;
 import modelo.EntidadeBase;
 
@@ -45,5 +49,14 @@ public abstract class ControleBase<T extends EntidadeBase, DAOGenerico extends G
 
 	public List<T> listarTodos(){
 		return dao.listarTodos();
+	}
+	
+	public void alerta(String mensagem, String titulo){
+		if(titulo == null){
+			titulo = "Alerta";
+		}
+		JOptionPane pane = new JOptionPane(mensagem);
+	    JDialog dialog = pane.createDialog(new JFrame(), titulo);
+	    dialog.setVisible(true);
 	}
 }
