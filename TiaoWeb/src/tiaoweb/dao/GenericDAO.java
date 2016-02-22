@@ -2,18 +2,26 @@ package tiaoweb.dao;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
- 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import tiaoweb.model.EntidadeBase;
  
 @SuppressWarnings("unchecked")
-public class GenericDAO<T, PK> {
+public class GenericDAO<T extends EntidadeBase, PK> {
 	
     @PersistenceContext(unitName="tiaoWeb-pu")
     protected EntityManager entityManager;
  
     public void persist(T entity) {
+    	if(entity.getId() != null){
+    		entity.setDataAlteracao(new Date());
+    	} else {
+    		entity.setDataCadastro(new Date());
+    	}
         entityManager.persist(entity);
     }
  
