@@ -8,5 +8,5 @@ import javax.persistence.Table;
 public class Usuario extends EntidadeBase {
 
 	private static final long serialVersionUID = 4059633922205352518L;
-		
+		//teste
 }
